@@ -1,8 +1,13 @@
+
 # Use the base image
-FROM modenaf360/gotty:latest
- 
-# Expose the desired port
-EXPOSE 8080
- 
-# Start Gotty with the specified command
-CMD ["gotty", "-r", "-w", "--port", "8080", "/bin/bash"]
+FROM fredblgr/ubuntu-novnc:22.04
+ 
+# Expose the port on which NoVNC runs (80 inside the container)
+EXPOSE 80
+ 
+# Set the environment variable for screen resolution
+ENV RESOLUTION 1366x768
+ 
+# Start the command to run NoVNC
+CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+
